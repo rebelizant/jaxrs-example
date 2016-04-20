@@ -1,5 +1,6 @@
 package io.github.rebelizant.jaxrsexample;
 
+import io.github.rebelizant.jaxrsexample.rest.CustomerResourceImpl;
 import org.glassfish.jersey.server.ResourceConfig;
 
 import javax.ws.rs.ApplicationPath;
@@ -12,7 +13,7 @@ import javax.ws.rs.ApplicationPath;
 public class ExampleApplication extends ResourceConfig {
 
     public ExampleApplication() {
-        packages(true, "io.github.rebelizant.jaxrsexample.rest");
+        register(new CustomerResourceImpl());
     }
 
 }
