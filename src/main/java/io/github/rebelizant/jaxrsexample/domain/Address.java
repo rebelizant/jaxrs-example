@@ -1,9 +1,12 @@
 package io.github.rebelizant.jaxrsexample.domain;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 /**
  * @author rebelizant
  *         Created on 18.04.16
  */
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class Address {
 
     private String street;
