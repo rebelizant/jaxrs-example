@@ -9,6 +9,10 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
 
+import java.util.stream.Stream;
+import java.util.stream.IntStream;
+import java.util.stream.Collectors;
+
 /**
  * @author rebelizant
  *         Created on 18.04.16
@@ -16,18 +20,11 @@ import java.util.stream.Collectors;
 @Component
 public class CustomerRepositoryImpl implements CustomerRepository {
 
-    private ConcurrentMap<Long, Customer> customers = new ConcurrentHashMap<>();
+    private ConcurrentMap<Long, Customer> customers;
 
     public CustomerRepositoryImpl() {
-        Customer customer = new Customer();
-        customer.setId(1L);
-        customer.setFirstName("John");
-        customer.setLastName("Konstantine");
-        Address address = new Address();
-        address.setCountry("UK");
-        address.setCity("London");
-        customer.setAddress(address);
-        addCustomer(customer);
+        customers = IntStream.range(1, 21).mapToObj(id -> randomCustomer(id))
+                                .collect(Collectors.toConcurrentMap(c -> c.getId(), c -> c));
     }
 
     @Override
@@ -53,5 +50,19 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     @Override
     public void deleteCustomer(Long id) {
         customers.remove(id);
+    }
+    
+    private Customer randomCustomer(int id) {
+        Customer customer = new Customer();
+        customer.setId(Long.valueOf(id));
+        customer.setFirstName(String.format("FirstName-%s", id));
+        customer.setLastName(String.format("LastName-%s", id));
+        Address address = new Address();
+        address.setCountry(String.format("Country-%s", id % 3));
+        address.setState(String.format("State-%s", id % 3));
+        address.setCity(String.format("City-%s", id % 5));
+        address.setStreet(String.format("Street-%s", id % 7));
+        customer.setAddress(address);
+        return customer;
     }
 }
