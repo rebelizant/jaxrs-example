@@ -12,7 +12,7 @@ public interface CustomerRepository {
 
     void addCustomer(Customer customer);
 
-    List<Customer> getCustomers();
+    List<Customer> getCustomers(int start, int size);
 
     void updateCustomer(Long id, Customer customer);
 

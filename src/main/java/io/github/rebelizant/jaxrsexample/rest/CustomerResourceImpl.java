@@ -28,8 +28,8 @@ public class CustomerResourceImpl implements CustomerResource {
     }
 
     @Override
-    public List<Customer> getCustomers() {
-        return customerRepository.getCustomers();
+    public List<Customer> getCustomers(int start, int size) {
+        return customerRepository.getCustomers(start, size);
     }
 
     @Override

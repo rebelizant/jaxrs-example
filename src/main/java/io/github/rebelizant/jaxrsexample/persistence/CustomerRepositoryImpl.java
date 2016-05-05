@@ -33,8 +33,12 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     }
 
     @Override
-    public List<Customer> getCustomers() {
-        return customers.values().stream().collect(Collectors.toList());
+    public List<Customer> getCustomers(int start, int size) {
+        Stream<Customer> stream = customers.values().stream().skip(start > 0 ? start - 1 : start);
+        if (size > 0) {
+            return stream.limit(size).collect(Collectors.toList());
+        }
+        return stream.collect(Collectors.toList());
     }
 
     @Override

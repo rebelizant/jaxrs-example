@@ -19,7 +19,7 @@ public interface CustomerResource {
     void createCustomer(Customer customer);
 
     @GET
-    List<Customer> getCustomers();
+    List<Customer> getCustomers(@QueryParam("start") int start, @QueryParam("size") int size);
 
     @PUT
     @Path("/{id}")

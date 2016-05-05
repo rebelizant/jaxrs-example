@@ -52,3 +52,11 @@ Contains a couple of REST resources:
         - ```curl -i -H "Accept: application/json" -X DELETE http://localhost:8080/jaxrs-example/customers/1```
 
 2. **OrderResource** (TBD)
+
+
+
+
+## Know issues:
+1. To query customers using start and size query params surrond url with quotation marks, otherwise the second query param will be ignored and set to default value, which is zero:
+    
+    ```curl -i -H "Accept: application/json" "http://localhost:8080/jaxrs-example/customers?size=1&start=2"```
