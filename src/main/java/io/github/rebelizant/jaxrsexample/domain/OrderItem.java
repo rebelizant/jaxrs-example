@@ -2,17 +2,24 @@ package io.github.rebelizant.jaxrsexample.domain;
 
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  * @author rebelizant
  *         Created on 18.04.16
  */
-public class OrderItem extends AbstractEntity {
+@XmlRootElement
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
+public class OrderItem {
 
     private int quantity;
 
     private Product product;
 
-    private BigDecimal cost;
+    private transient BigDecimal cost;
 
     public int getQuantity() {
         return quantity;
@@ -30,8 +37,9 @@ public class OrderItem extends AbstractEntity {
         this.product = product;
     }
 
+    @JsonProperty
     public BigDecimal getCost() {
-        return cost;
+        return BigDecimal.ZERO.equals(cost) || cost == null ? product.getCost() : cost;
     }
 
     public void setCost(BigDecimal cost) {

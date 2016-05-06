@@ -6,13 +6,19 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  * @author rebelizant
  *         Created on 18.04.16
  */
+@XmlRootElement
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class Order extends AbstractEntity {
 
-    private BigDecimal totalCost;
+    private transient BigDecimal totalCost;
 
     private Date date;
 
@@ -25,22 +31,13 @@ public class Order extends AbstractEntity {
     }
 
     public void removeItem(OrderItem orderItem) {
-        removeItem(orderItem.getId());
-    }
-
-    public void removeItem(Long orderItemId) {
-        orderItems.stream()
-                .filter(self -> Objects.equals(self.getId(), orderItemId))
-                .findFirst()
-                .ifPresent(self -> orderItems.remove(self));
+        removeItem(orderItem);
     }
 
     public BigDecimal getTotalCost() {
-        return totalCost;
-    }
-
-    public void setTotalCost(BigDecimal totalCost) {
-        this.totalCost = totalCost;
+        return orderItems.stream()
+                    .map(orderItem -> orderItem.getCost())
+                    .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
     public Date getDate() {
