@@ -1,6 +1,7 @@
 package io.github.rebelizant.jaxrsexample;
 
 import io.github.rebelizant.jaxrsexample.rest.CustomerResourceImpl;
+import io.github.rebelizant.jaxrsexample.rest.OrderResourceImpl;
 import org.glassfish.jersey.server.ResourceConfig;
 
 import javax.ws.rs.ApplicationPath;
@@ -13,17 +14,11 @@ import java.util.HashSet;
  *         Created on 18.04.16
  */
 @ApplicationPath("/")
-public class ExampleApplication extends Application {
-    
-    private Set<Object> singletons = new HashSet<>();
+public class ExampleApplication extends ResourceConfig {
 
     public ExampleApplication() {
-        singletons.add(new CustomerResourceImpl());
-    }
-    
-    @Override
-    public Set<Object> getSingletons() {
-        return singletons;
+        register(io.github.rebelizant.jaxrsexample.rest.CustomerResourceImpl.class);
+        register(io.github.rebelizant.jaxrsexample.rest.OrderResourceImpl.class);
     }
 
 }
