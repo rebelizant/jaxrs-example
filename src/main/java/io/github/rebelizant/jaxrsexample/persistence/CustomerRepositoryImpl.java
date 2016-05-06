@@ -24,12 +24,14 @@ public class CustomerRepositoryImpl implements CustomerRepository {
 
     public CustomerRepositoryImpl() {
         customers = IntStream.range(1, 21).mapToObj(id -> randomCustomer(id))
-                                .collect(Collectors.toConcurrentMap(c -> c.getId(), c -> c));
+                            .collect(Collectors.toConcurrentMap(c -> c.getId(), c -> c));
     }
 
     @Override
     public void addCustomer(Customer customer) {
-        customers.put(customer.getId(), customer);
+        Long nextId = nextId(customers);
+        customer.setId(nextId);
+        customers.put(nextId, customer);
     }
 
     @Override
@@ -43,6 +45,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
 
     @Override
     public void updateCustomer(Long id, Customer customer) {
+        customer.setId(id);
         customers.put(id, customer);
     }
 
@@ -69,4 +72,5 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         customer.setAddress(address);
         return customer;
     }
+
 }

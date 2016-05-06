@@ -6,6 +6,8 @@ import io.github.rebelizant.jaxrsexample.persistence.CustomerRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.inject.Singleton;
+
 import java.util.List;
 
 /**
@@ -13,13 +15,13 @@ import java.util.List;
  *         Created on 18.04.16
  */
 @Component
+@Singleton
 public class CustomerResourceImpl implements CustomerResource {
 
     @Autowired
     private CustomerRepository customerRepository;
 
     public CustomerResourceImpl() {
-        customerRepository = new CustomerRepositoryImpl();
     }
 
     @Override

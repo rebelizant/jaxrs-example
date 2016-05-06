@@ -8,7 +8,7 @@ import java.util.List;
  * @author rebelizant
  *         Created on 18.04.16
  */
-public interface CustomerRepository {
+public interface CustomerRepository extends Repository<Customer> {
 
     void addCustomer(Customer customer);
 
