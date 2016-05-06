@@ -1,15 +1,15 @@
 package io.github.rebelizant.jaxrsexample.persistence;
 
-import io.github.rebelizant.jaxrsexample.domain.*;
-import java.util.List;
-import java.util.concurrent.ConcurrentMap;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
-import java.util.stream.Collectors;
+import io.github.rebelizant.jaxrsexample.domain.AbstractEntity;
+import io.github.rebelizant.jaxrsexample.domain.Product;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
-
-import org.springframework.stereotype.Component;
+import java.util.List;
+import java.util.concurrent.ConcurrentMap;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 @Component
 public class ProductRepositoryImpl implements ProductRepository {
@@ -17,8 +17,8 @@ public class ProductRepositoryImpl implements ProductRepository {
     private ConcurrentMap<Long, Product> products;
     
     public ProductRepositoryImpl() {
-        products = IntStream.range(1, 11).mapToObj(id -> randomProduct(id))
-                        .collect(Collectors.toConcurrentMap(p -> p.getId(), p -> p));
+        products = IntStream.range(1, 11).mapToObj(this::randomProduct)
+                        .collect(Collectors.toConcurrentMap(AbstractEntity::getId, p -> p));
     }
     
     public void addProduct(Product product) {
@@ -50,7 +50,7 @@ public class ProductRepositoryImpl implements ProductRepository {
     
     private Product randomProduct(int id) {
         Product product = new Product();
-        product.setId(Long.valueOf(id));
+        product.setId((long) id);
         product.setName(String.format("Name-%s", id));
         product.setCost(BigDecimal.valueOf(Math.random() * 10));
         return product;

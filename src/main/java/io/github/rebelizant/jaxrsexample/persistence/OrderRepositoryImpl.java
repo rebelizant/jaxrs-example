@@ -1,19 +1,17 @@
 package io.github.rebelizant.jaxrsexample.persistence;
 
-import io.github.rebelizant.jaxrsexample.domain.*;
-
-import org.springframework.stereotype.Component;
+import io.github.rebelizant.jaxrsexample.domain.AbstractEntity;
+import io.github.rebelizant.jaxrsexample.domain.Order;
+import io.github.rebelizant.jaxrsexample.domain.OrderItem;
 import org.springframework.beans.factory.annotation.Autowired;
-import javax.annotation.PostConstruct;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.ConcurrentHashMap;
-
-import java.util.stream.IntStream;
 import java.util.stream.Collectors;
-
-import java.math.BigDecimal;
+import java.util.stream.IntStream;
 
 @Component
 public class OrderRepositoryImpl implements OrderRepository {
@@ -31,8 +29,8 @@ public class OrderRepositoryImpl implements OrderRepository {
     
     @PostConstruct
     public void init() {
-        orders = IntStream.range(1, 41).mapToObj(id -> randomOrder(id))
-                        .collect(Collectors.toConcurrentMap(o -> o.getId(), o -> o));
+        orders = IntStream.range(1, 41).mapToObj(this::randomOrder)
+                        .collect(Collectors.toConcurrentMap(AbstractEntity::getId, o -> o));
     }
     
     @Override
@@ -72,10 +70,10 @@ public class OrderRepositoryImpl implements OrderRepository {
     
     private Order randomOrder(int id) {
         Order order = new Order();
-        order.setId(Long.valueOf(id));
-        List<OrderItem> orderItems = IntStream.range(1, id % 10 + 1).mapToObj(i -> randomOrderItem(i)).collect(Collectors.toList());
+        order.setId((long) id);
+        List<OrderItem> orderItems = IntStream.range(1, id % 10 + 1).mapToObj(this::randomOrderItem).collect(Collectors.toList());
         order.setOrderItems(orderItems);
-        order.setCustomer(customerRepository.getCustomer(Long.valueOf(id % 20 + 1)));
+        order.setCustomer(customerRepository.getCustomer((long) (id % 20 + 1)));
         return order;
     }
     
@@ -85,7 +83,7 @@ public class OrderRepositoryImpl implements OrderRepository {
             orderItem.setCost(BigDecimal.valueOf(Math.random() * 10));
         }
         orderItem.setQuantity(Math.random() > 0.5 ? 2 : 1);
-        orderItem.setProduct(productRepository.getProduct(Long.valueOf(id)));
+        orderItem.setProduct(productRepository.getProduct((long) id));
         return orderItem;
     }
     

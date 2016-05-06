@@ -1,17 +1,15 @@
 package io.github.rebelizant.jaxrsexample.persistence;
 
+import io.github.rebelizant.jaxrsexample.domain.AbstractEntity;
 import io.github.rebelizant.jaxrsexample.domain.Address;
 import io.github.rebelizant.jaxrsexample.domain.Customer;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
-
-import java.util.stream.Stream;
 import java.util.stream.IntStream;
-import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author rebelizant
@@ -23,8 +21,8 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     private ConcurrentMap<Long, Customer> customers;
 
     public CustomerRepositoryImpl() {
-        customers = IntStream.range(1, 21).mapToObj(id -> randomCustomer(id))
-                            .collect(Collectors.toConcurrentMap(c -> c.getId(), c -> c));
+        customers = IntStream.range(1, 21).mapToObj(this::randomCustomer)
+                            .collect(Collectors.toConcurrentMap(AbstractEntity::getId, c -> c));
     }
 
     @Override
@@ -61,7 +59,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     
     private Customer randomCustomer(int id) {
         Customer customer = new Customer();
-        customer.setId(Long.valueOf(id));
+        customer.setId((long) id);
         customer.setFirstName(String.format("FirstName-%s", id));
         customer.setLastName(String.format("LastName-%s", id));
         Address address = new Address();
