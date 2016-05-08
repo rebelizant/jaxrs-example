@@ -19,8 +19,8 @@ public class OrderSubResourceImpl implements OrderSubResource {
     }
     
     @Override
-    public Order getOrder(Long orderId) {
-        return orderRepository.getOrder(orderId);
+    public Order getOrder(Long customerId, Long orderId) {
+        return orderRepository.getOrder(customerId, orderId);
     }
 
     @Override

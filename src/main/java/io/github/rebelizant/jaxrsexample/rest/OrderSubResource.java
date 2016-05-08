@@ -13,7 +13,7 @@ public interface OrderSubResource {
     
     @GET
     @Path("/{orderId}")
-    Order getOrder(@PathParam("orderId") Long orderId);
+    Order getOrder(@PathParam("customerId") Long customerId, @PathParam("orderId") Long orderId);
 
     @GET
     List<Order> getOrders(@PathParam("customerId") Long customerId,

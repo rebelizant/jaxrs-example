@@ -15,6 +15,8 @@ public interface OrderRepository extends Repository<Order> {
     void updateOrder(Long orderId, Order order);
     
     Order getOrder(Long orderId);
+
+    Order getOrder(Long customerId, Long orderId);
     
     void deleteOrder(Long orderId);
     

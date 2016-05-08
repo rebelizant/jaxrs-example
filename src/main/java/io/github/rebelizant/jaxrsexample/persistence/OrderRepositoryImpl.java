@@ -67,7 +67,13 @@ public class OrderRepositoryImpl implements OrderRepository {
     public Order getOrder(Long orderId) {
         return orders.get(orderId);
     }
-    
+
+    @Override
+    public Order getOrder(Long customerId, Long orderId) {
+        return orders.values().stream().filter(o -> o.getCustomer().getId().equals(customerId))
+                .filter(o -> o.getId().equals(orderId)).findFirst().orElse(null);
+    }
+
     @Override
     public void deleteOrder(Long orderId) {
         orders.remove(orderId);
