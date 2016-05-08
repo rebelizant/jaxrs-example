@@ -30,12 +30,27 @@ It is simple abstraction of a persistence layer. It does not connect to any data
 
     void deleteCustomer(Long id);
 ```
-* OrderRepository(TBD)
+* OrderRepository
+```
+    void addOrder(Order order);
+
+    List<Order> getAllOrders();
+
+    List<Order> getOrdersByCustomer(Long customerId, int start, int count);
+
+    void updateOrder(Long orderId, Order order);
+
+    Order getOrder(Long orderId);
+
+    Order getOrder(Long customerId, Long orderId);
+
+    void deleteOrder(Long orderId);
+```
 
 ### REST layer
 Contains a couple of REST resources:
 - CustomerResource
-- OrderResource(TBD)
+- OrderSubResource
 
 1. **CustomerResource** is implemented by **CustomerResourceImpl**. **CustomerResource** endpoints:
 
@@ -51,8 +66,13 @@ Contains a couple of REST resources:
     - DELETE _/customers/{id}_ is used to delete customer by id:
         - ```curl -i -H "Accept: application/json" -X DELETE http://localhost:8080/jaxrs-example/customers/1```
 
-2. **OrderResource** (TBD)
+2. **OrderSubResource**
 
+    Endpoints:
+    - GET /customers/{customerId}/orders is used to get orders of the specified customer
+        - ``` curl -H "Accept: application/json" http://localhost:8080/jaxrs-example/customers/4/orders```
+    - GET /customers/{customerId}/orders/{orderId}
+        - ``` curl -H "Accept: application/json" http://localhost:8080/jaxrs-example/customers/4/orders/3```
 
 
 
