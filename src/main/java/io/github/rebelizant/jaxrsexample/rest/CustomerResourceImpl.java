@@ -19,6 +19,9 @@ public class CustomerResourceImpl implements CustomerResource {
     @Autowired
     private CustomerRepository customerRepository;
 
+    @Autowired
+    private OrderSubResource orderSubResource;
+
     public CustomerResourceImpl() {
     }
 
@@ -45,5 +48,10 @@ public class CustomerResourceImpl implements CustomerResource {
     @Override
     public void deleteCustomer(Long id) {
         customerRepository.deleteCustomer(id);
+    }
+
+    @Override
+    public OrderSubResource getOrderSubResource() {
+        return orderSubResource;
     }
 }

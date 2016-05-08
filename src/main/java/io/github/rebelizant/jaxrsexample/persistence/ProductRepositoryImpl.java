@@ -57,7 +57,7 @@ public class ProductRepositoryImpl implements ProductRepository {
         Product product = new Product();
         product.setId((long) id);
         product.setName(String.format("Name-%s", id));
-        product.setCost(BigDecimal.valueOf(Math.random() * 10));
+        product.setCost(BigDecimal.valueOf(Math.random() * 10).setScale(2, BigDecimal.ROUND_HALF_UP));
         return product;
     }
     

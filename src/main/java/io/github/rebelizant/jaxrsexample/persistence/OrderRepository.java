@@ -10,7 +10,7 @@ public interface OrderRepository extends Repository<Order> {
     
     List<Order> getAllOrders();
     
-    List<Order> getOrdersByCustomer(Long customerId);
+    List<Order> getOrdersByCustomer(Long customerId, int start, int count);
     
     void updateOrder(Long orderId, Order order);
     

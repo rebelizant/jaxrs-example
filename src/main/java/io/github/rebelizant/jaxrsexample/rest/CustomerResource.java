@@ -33,4 +33,7 @@ public interface CustomerResource {
     @Path("/{id}")
     void deleteCustomer(@PathParam("id") Long id);
 
+    @Path("{customerId}/orders")
+    OrderSubResource getOrderSubResource();
+
 }
