@@ -1,6 +1,7 @@
 package io.github.rebelizant.jaxrsexample;
 
 import io.github.rebelizant.jaxrsexample.rest.CustomerResourceImpl;
+import io.github.rebelizant.jaxrsexample.rest.mappers.CustomerNotFoundExceptionMapper;
 import io.github.rebelizant.jaxrsexample.rest.mappers.OrderNotFoundExceptionMapper;
 
 import javax.ws.rs.ApplicationPath;
@@ -23,6 +24,7 @@ public class ExampleApplication extends Application {
         HashSet<Class<?>> classes = new HashSet<>();
         classes.add(CustomerResourceImpl.class);
         classes.add(OrderNotFoundExceptionMapper.class);
+        classes.add(CustomerNotFoundExceptionMapper.class);
         return classes;
     }
 
