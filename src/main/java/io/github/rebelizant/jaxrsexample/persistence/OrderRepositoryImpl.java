@@ -3,12 +3,14 @@ package io.github.rebelizant.jaxrsexample.persistence;
 import io.github.rebelizant.jaxrsexample.domain.AbstractEntity;
 import io.github.rebelizant.jaxrsexample.domain.Order;
 import io.github.rebelizant.jaxrsexample.domain.OrderItem;
+import io.github.rebelizant.jaxrsexample.exception.OrderNotFoundException;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -59,24 +61,31 @@ public class OrderRepositoryImpl implements OrderRepository {
     
     @Override
     public void updateOrder(Long orderId, Order order) {
+        if (orders.get(orderId) == null) {
+            throw new OrderNotFoundException(orderId);
+        }
         order.setId(orderId);
         orders.put(orderId, order);
     }
     
     @Override
     public Order getOrder(Long orderId) {
-        return orders.get(orderId);
+        return Optional.ofNullable(orders.get(orderId))
+                .orElseThrow(() -> new OrderNotFoundException(orderId));
     }
 
     @Override
     public Order getOrder(Long customerId, Long orderId) {
         return orders.values().stream().filter(o -> o.getCustomer().getId().equals(customerId))
-                .filter(o -> o.getId().equals(orderId)).findFirst().orElse(null);
+                .filter(o -> o.getId().equals(orderId)).findFirst().
+                orElseThrow(() -> new OrderNotFoundException(customerId, orderId));
     }
 
     @Override
     public void deleteOrder(Long orderId) {
-        orders.remove(orderId);
+        if (orders.remove(orderId) == null) {
+            throw new OrderNotFoundException(orderId);
+        }
     }
     
     private Order randomOrder(int id) {

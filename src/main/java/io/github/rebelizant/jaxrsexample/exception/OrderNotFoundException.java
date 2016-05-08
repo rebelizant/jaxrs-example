@@ -9,4 +9,8 @@ public class OrderNotFoundException extends JaxRsExampleException {
     public OrderNotFoundException(Long customerId, Long orderId) {
         super(String.format("Order hasn't been found, customerId=%s, orderId=%s", customerId, orderId));
     }
+
+    public OrderNotFoundException(Long orderId) {
+        super(String.format("Order hasn't been found, orderId=%s", orderId));
+    }
 }
