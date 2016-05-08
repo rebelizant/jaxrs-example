@@ -4,9 +4,9 @@ import io.github.rebelizant.jaxrsexample.domain.AbstractEntity;
 import io.github.rebelizant.jaxrsexample.domain.Address;
 import io.github.rebelizant.jaxrsexample.domain.Customer;
 import io.github.rebelizant.jaxrsexample.exception.CustomerNotFoundException;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import javax.inject.Named;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentMap;
@@ -18,7 +18,7 @@ import java.util.stream.Stream;
  * @author rebelizant
  *         Created on 18.04.16
  */
-@Component
+@Named
 public class CustomerRepositoryImpl implements CustomerRepository {
 
     private ConcurrentMap<Long, Customer> customers;

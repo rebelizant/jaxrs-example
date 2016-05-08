@@ -3,13 +3,17 @@ package io.github.rebelizant.jaxrsexample.rest.mappers;
 import io.github.rebelizant.jaxrsexample.exception.CustomerNotFoundException;
 import io.github.rebelizant.jaxrsexample.exception.ErrorMessage;
 
+import javax.inject.Named;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
+import javax.ws.rs.ext.Provider;
 
 /**
  * @author rebelizant
  *         Created on 08.05.16
  */
+@Provider
+@Named
 public class CustomerNotFoundExceptionMapper implements ExceptionMapper<CustomerNotFoundException> {
 
     @Override

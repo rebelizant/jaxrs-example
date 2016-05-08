@@ -3,6 +3,7 @@ package io.github.rebelizant.jaxrsexample.rest.mappers;
 import io.github.rebelizant.jaxrsexample.exception.ErrorMessage;
 import io.github.rebelizant.jaxrsexample.exception.OrderNotFoundException;
 
+import javax.inject.Named;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
@@ -12,6 +13,7 @@ import javax.ws.rs.ext.Provider;
  *         Created on 08.05.16
  */
 @Provider
+@Named
 public class OrderNotFoundExceptionMapper implements ExceptionMapper<OrderNotFoundException> {
 
     @Override

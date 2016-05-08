@@ -4,10 +4,10 @@ import io.github.rebelizant.jaxrsexample.domain.AbstractEntity;
 import io.github.rebelizant.jaxrsexample.domain.Order;
 import io.github.rebelizant.jaxrsexample.domain.OrderItem;
 import io.github.rebelizant.jaxrsexample.exception.OrderNotFoundException;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import javax.inject.Named;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-@Component
+@Named
 public class OrderRepositoryImpl implements OrderRepository {
     
     private ConcurrentMap<Long, Order> orders;

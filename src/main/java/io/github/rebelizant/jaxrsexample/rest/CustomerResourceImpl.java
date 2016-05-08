@@ -2,9 +2,9 @@ package io.github.rebelizant.jaxrsexample.rest;
 
 import io.github.rebelizant.jaxrsexample.domain.Customer;
 import io.github.rebelizant.jaxrsexample.persistence.CustomerRepository;
-import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.inject.Singleton;
 import java.util.List;
 
@@ -12,7 +12,7 @@ import java.util.List;
  * @author rebelizant
  *         Created on 18.04.16
  */
-@Component
+@Named
 @Singleton
 public class CustomerResourceImpl implements CustomerResource {
 

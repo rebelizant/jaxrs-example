@@ -3,13 +3,13 @@ package io.github.rebelizant.jaxrsexample.rest;
 import io.github.rebelizant.jaxrsexample.domain.Order;
 import io.github.rebelizant.jaxrsexample.persistence.CustomerRepository;
 import io.github.rebelizant.jaxrsexample.persistence.OrderRepository;
-import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.inject.Singleton;
 import java.util.List;
 
-@Component
+@Named
 @Singleton
 public class OrderSubResourceImpl implements OrderSubResource {
 
@@ -18,7 +18,7 @@ public class OrderSubResourceImpl implements OrderSubResource {
 
     @Inject
     private CustomerRepository customerRepository;
-    
+
     public OrderSubResourceImpl() {
     }
 

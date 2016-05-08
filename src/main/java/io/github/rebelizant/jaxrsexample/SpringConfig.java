@@ -10,7 +10,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ComponentScan(basePackages = {
     "io.github.rebelizant.jaxrsexample.persistence",
-    "io.github.rebelizant.jaxrsexample.rest"
+    "io.github.rebelizant.jaxrsexample.rest",
+    "io.github.rebelizant.jaxrsexample.rest.mappers"
 })
 public class SpringConfig {
 }

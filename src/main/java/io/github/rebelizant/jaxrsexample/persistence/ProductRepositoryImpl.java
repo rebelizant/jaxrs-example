@@ -2,9 +2,9 @@ package io.github.rebelizant.jaxrsexample.persistence;
 
 import io.github.rebelizant.jaxrsexample.domain.AbstractEntity;
 import io.github.rebelizant.jaxrsexample.domain.Product;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import javax.inject.Named;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.concurrent.ConcurrentMap;
@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-@Component
+@Named
 public class ProductRepositoryImpl implements ProductRepository {
     
     private ConcurrentMap<Long, Product> products;
