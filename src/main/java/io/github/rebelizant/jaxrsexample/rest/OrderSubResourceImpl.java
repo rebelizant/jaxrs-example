@@ -2,17 +2,17 @@ package io.github.rebelizant.jaxrsexample.rest;
 
 import io.github.rebelizant.jaxrsexample.domain.Order;
 import io.github.rebelizant.jaxrsexample.persistence.OrderRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.util.List;
 
 @Component
 @Singleton
 public class OrderSubResourceImpl implements OrderSubResource {
-    
-    @Autowired
+
+    @Inject
     private OrderRepository orderRepository;
     
     public OrderSubResourceImpl() {

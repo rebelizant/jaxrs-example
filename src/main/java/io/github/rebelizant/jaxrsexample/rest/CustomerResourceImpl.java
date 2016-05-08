@@ -2,9 +2,9 @@ package io.github.rebelizant.jaxrsexample.rest;
 
 import io.github.rebelizant.jaxrsexample.domain.Customer;
 import io.github.rebelizant.jaxrsexample.persistence.CustomerRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.util.List;
 
@@ -16,10 +16,10 @@ import java.util.List;
 @Singleton
 public class CustomerResourceImpl implements CustomerResource {
 
-    @Autowired
+    @Inject
     private CustomerRepository customerRepository;
 
-    @Autowired
+    @Inject
     private OrderSubResource orderSubResource;
 
     public CustomerResourceImpl() {

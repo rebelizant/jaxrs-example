@@ -3,10 +3,10 @@ package io.github.rebelizant.jaxrsexample.persistence;
 import io.github.rebelizant.jaxrsexample.domain.AbstractEntity;
 import io.github.rebelizant.jaxrsexample.domain.Order;
 import io.github.rebelizant.jaxrsexample.domain.OrderItem;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import javax.inject.Inject;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.concurrent.ConcurrentMap;
@@ -18,11 +18,11 @@ import java.util.stream.Stream;
 public class OrderRepositoryImpl implements OrderRepository {
     
     private ConcurrentMap<Long, Order> orders;
-    
-    @Autowired
+
+    @Inject
     private ProductRepository productRepository;
-    
-    @Autowired
+
+    @Inject
     private CustomerRepository customerRepository;
     
     public OrderRepositoryImpl() {
