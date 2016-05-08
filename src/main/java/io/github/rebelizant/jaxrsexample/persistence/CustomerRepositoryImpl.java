@@ -3,10 +3,12 @@ package io.github.rebelizant.jaxrsexample.persistence;
 import io.github.rebelizant.jaxrsexample.domain.AbstractEntity;
 import io.github.rebelizant.jaxrsexample.domain.Address;
 import io.github.rebelizant.jaxrsexample.domain.Customer;
+import io.github.rebelizant.jaxrsexample.exception.CustomerNotFoundException;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -54,7 +56,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
 
     @Override
     public Customer getCustomer(Long id) {
-        return customers.get(id);
+        return Optional.ofNullable(customers.get(id)).orElseThrow(() -> new CustomerNotFoundException(id));
     }
 
     @Override

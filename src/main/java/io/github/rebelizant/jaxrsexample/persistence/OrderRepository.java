@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface OrderRepository extends Repository<Order> {
     
-    void addOrder(Order order);
+    Long addOrder(Order order);
     
     List<Order> getAllOrders();
     

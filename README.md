@@ -69,6 +69,9 @@ Contains a couple of REST resources:
 2. **OrderSubResource**
 
     Endpoints:
+
+    - POST /customers/{customerId}/orders is used to submit order for the specified customer
+        - ``` curl -H "Content-Type: application/json" -H "Accept: application/json" -X POST -d '{"orderItems":[{"quantity":10,"product":{"id":1,"name":"Name-1","cost":7.61},"cost":7.61}]}' ```
     - GET /customers/{customerId}/orders is used to get orders of the specified customer
         - ``` curl -H "Accept: application/json" http://localhost:8080/jaxrs-example/customers/4/orders```
     - GET /customers/{customerId}/orders/{orderId}

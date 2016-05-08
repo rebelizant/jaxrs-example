@@ -10,6 +10,9 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public interface OrderSubResource {
+
+    @POST
+    Order submitOrder(@PathParam("customerId") Long customerId, Order order);
     
     @GET
     @Path("/{orderId}")

@@ -37,10 +37,11 @@ public class OrderRepositoryImpl implements OrderRepository {
     }
     
     @Override
-    public void addOrder(Order order) {
+    public Long addOrder(Order order) {
         Long nextId = nextId(orders);
         order.setId(nextId);
         orders.putIfAbsent(nextId, order);
+        return nextId;
     }
     
     @Override
