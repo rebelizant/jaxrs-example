@@ -2,12 +2,10 @@ package io.github.rebelizant.jaxrsexample.rest;
 
 import io.github.rebelizant.jaxrsexample.domain.Customer;
 import io.github.rebelizant.jaxrsexample.persistence.CustomerRepository;
-import io.github.rebelizant.jaxrsexample.persistence.CustomerRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Singleton;
-
 import java.util.List;
 
 /**

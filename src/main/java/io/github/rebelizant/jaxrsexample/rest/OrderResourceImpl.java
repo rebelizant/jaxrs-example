@@ -1,12 +1,9 @@
 package io.github.rebelizant.jaxrsexample.rest;
 
-import io.github.rebelizant.jaxrsexample.domain.*;
-
-import org.springframework.stereotype.Component;
-import org.springframework.beans.factory.annotation.Autowired;
-
+import io.github.rebelizant.jaxrsexample.domain.Order;
 import io.github.rebelizant.jaxrsexample.persistence.OrderRepository;
-import io.github.rebelizant.jaxrsexample.persistence.OrderRepositoryImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.inject.Singleton;
 

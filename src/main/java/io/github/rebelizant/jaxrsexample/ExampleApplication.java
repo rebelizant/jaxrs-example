@@ -1,24 +1,26 @@
 package io.github.rebelizant.jaxrsexample;
 
 import io.github.rebelizant.jaxrsexample.rest.CustomerResourceImpl;
-import io.github.rebelizant.jaxrsexample.rest.OrderResourceImpl;
-import org.glassfish.jersey.server.ResourceConfig;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
-import java.util.Set;
 import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author rebelizant
  *         Created on 18.04.16
  */
 @ApplicationPath("/")
-public class ExampleApplication extends ResourceConfig {
+public class ExampleApplication extends Application {
 
     public ExampleApplication() {
-        register(io.github.rebelizant.jaxrsexample.rest.CustomerResourceImpl.class);
-        register(io.github.rebelizant.jaxrsexample.rest.OrderResourceImpl.class);
     }
 
+    @Override
+    public Set<Class<?>> getClasses() {
+        HashSet<Class<?>> classes = new HashSet<>();
+        classes.add(CustomerResourceImpl.class);
+        return classes;
+    }
 }

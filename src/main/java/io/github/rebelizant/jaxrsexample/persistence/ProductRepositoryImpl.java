@@ -4,6 +4,7 @@ import io.github.rebelizant.jaxrsexample.domain.AbstractEntity;
 import io.github.rebelizant.jaxrsexample.domain.Product;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.concurrent.ConcurrentMap;
@@ -17,8 +18,12 @@ public class ProductRepositoryImpl implements ProductRepository {
     private ConcurrentMap<Long, Product> products;
     
     public ProductRepositoryImpl() {
+    }
+
+    @PostConstruct
+    public void init() {
         products = IntStream.range(1, 11).mapToObj(this::randomProduct)
-                        .collect(Collectors.toConcurrentMap(AbstractEntity::getId, p -> p));
+                .collect(Collectors.toConcurrentMap(AbstractEntity::getId, p -> p));
     }
     
     public void addProduct(Product product) {

@@ -5,6 +5,7 @@ import io.github.rebelizant.jaxrsexample.domain.Address;
 import io.github.rebelizant.jaxrsexample.domain.Customer;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
@@ -21,8 +22,12 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     private ConcurrentMap<Long, Customer> customers;
 
     public CustomerRepositoryImpl() {
+    }
+
+    @PostConstruct
+    public void init() {
         customers = IntStream.range(1, 21).mapToObj(this::randomCustomer)
-                            .collect(Collectors.toConcurrentMap(AbstractEntity::getId, c -> c));
+                .collect(Collectors.toConcurrentMap(AbstractEntity::getId, c -> c));
     }
 
     @Override
