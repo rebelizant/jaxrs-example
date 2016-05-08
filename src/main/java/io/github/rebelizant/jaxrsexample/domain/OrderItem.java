@@ -1,11 +1,11 @@
 package io.github.rebelizant.jaxrsexample.domain;
 
-import java.math.BigDecimal;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import java.math.BigDecimal;
 
 /**
  * @author rebelizant
@@ -40,6 +40,11 @@ public class OrderItem {
     @JsonProperty
     public BigDecimal getCost() {
         return BigDecimal.ZERO.equals(cost) || cost == null ? product.getCost() : cost;
+    }
+
+    @JsonIgnore
+    public BigDecimal getTotalCost() {
+        return BigDecimal.valueOf(quantity).multiply(getCost());
     }
 
     public void setCost(BigDecimal cost) {

@@ -1,14 +1,12 @@
 package io.github.rebelizant.jaxrsexample.domain;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+import javax.xml.bind.annotation.XmlRootElement;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
-
-import com.fasterxml.jackson.annotation.JsonInclude;
-
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author rebelizant
@@ -17,8 +15,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class Order extends AbstractEntity {
-
-    private transient BigDecimal totalCost;
 
     private Date date;
 
@@ -36,7 +32,7 @@ public class Order extends AbstractEntity {
 
     public BigDecimal getTotalCost() {
         return orderItems.stream()
-                    .map(orderItem -> orderItem.getCost())
+                    .map(OrderItem::getTotalCost)
                     .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
