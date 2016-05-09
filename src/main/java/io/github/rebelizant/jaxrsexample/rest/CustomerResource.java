@@ -22,18 +22,18 @@ public interface CustomerResource {
     List<Customer> getCustomers(@QueryParam("start") int start, @QueryParam("size") int size);
 
     @PUT
-    @Path("/{id}")
+    @Path("/{id: \\d+}")
     void updateCustomer(@PathParam("id") Long id, Customer customer);
 
     @GET
-    @Path("/{id}")
+    @Path("/{id: \\d+}")
     Customer getCustomer(@PathParam("id") Long id);
 
     @DELETE
-    @Path("/{id}")
+    @Path("/{id: \\d+}")
     void deleteCustomer(@PathParam("id") Long id);
 
-    @Path("{customerId}/orders")
+    @Path("{customerId: \\d+}/orders")
     OrderSubResource getOrderSubResource();
 
 }
