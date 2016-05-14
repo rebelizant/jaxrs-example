@@ -1,10 +1,10 @@
 package io.github.rebelizant.jaxrsexample.rest;
 
-import io.github.rebelizant.jaxrsexample.domain.Customer;
-
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.util.List;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.StreamingOutput;
+import java.io.InputStream;
 
 /**
  * @author rebelizant
@@ -16,22 +16,22 @@ import java.util.List;
 public interface CustomerResource {
 
     @POST
-    void createCustomer(Customer customer);
+    Response createCustomer(InputStream inputStream);
 
     @GET
-    List<Customer> getCustomers(@QueryParam("start") int start, @QueryParam("size") int size);
+    StreamingOutput getCustomers(@QueryParam("start") int start, @QueryParam("size") int size);
 
     @PUT
     @Path("/{id: \\d+}")
-    void updateCustomer(@PathParam("id") Long id, Customer customer);
+    Response updateCustomer(@PathParam("id") Long id, InputStream inputStream);
 
     @GET
     @Path("/{id: \\d+}")
-    Customer getCustomer(@PathParam("id") Long id);
+    StreamingOutput getCustomer(@PathParam("id") Long id);
 
     @DELETE
     @Path("/{id: \\d+}")
-    void deleteCustomer(@PathParam("id") Long id);
+    Response deleteCustomer(@PathParam("id") Long id);
 
     @Path("{customerId: \\d+}/orders")
     OrderSubResource getOrderSubResource();
